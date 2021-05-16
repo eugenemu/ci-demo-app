@@ -11,8 +11,6 @@ jobs:
       - checkout
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
       - run: echo "This is the build job"
-      - run:        
-        command: npm install awscli
   test:
     docker:
       - image: cimg/node:16.1.0
@@ -32,6 +30,9 @@ jobs:
           path: test-results
       - store_artifacts:
           path: coverage
+      - run: 
+          name: Install aws-cli
+          command: apt-get update | apt-get install -y python-pip | pip install awscli
       - run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
       - deploy:
