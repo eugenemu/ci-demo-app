@@ -34,7 +34,7 @@ jobs:
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
       - deploy:
           command: |
-              mv -- test-results $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
+              sudo mv -- test-results $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
               aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://test-results-bohrman/test-data/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
 workflows:
   build_and_test:
