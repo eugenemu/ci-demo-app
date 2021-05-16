@@ -1,0 +1,39 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:9.9.0
+        auth:
+          username: $DOCKERHUB_USERNAME 
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
+      - run: echo "this is the build job"
+  test:
+    docker:
+      - image: circleci/node:9.9.0
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: echo "this is the test job"
+      - run: npm install
+      - run:
+          name: Run tests with JUnit as reporter
+          command: npm test --ci --runInBand --reporters=default --reporters=jest-junit
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: test-results
+      - store_artifacts:
+          path: test-results
+      - deploy:
+          command: 
+              mv -- test-results $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
+              aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://test-results-bohrman/test-data/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
+workflows:
+  build_and_test:
+    jobs:
+      - build
+      - test
