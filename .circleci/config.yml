@@ -10,7 +10,7 @@ jobs:
     steps:
       - checkout
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
-      - run: echo "this is the build job"
+      - run: echo "This is the build job"
   test:
     docker:
       - image: circleci/node:9.9.0
