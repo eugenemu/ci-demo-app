@@ -46,11 +46,6 @@
     "classNameTemplate": "{classname}-{title}",
     "titleTemplate": "{classname}-{title}",
     "ancestorSeparator": " › ",
-    "usePathForSuiteName": "true",
-    "testPathIgnorePatterns": [
-      "<rootDir>/build/",
-      "<rootDir>/node_modules/",
-      "<rootDir>/application/"
-    ]
+    "usePathForSuiteName": "true"
   }
 }

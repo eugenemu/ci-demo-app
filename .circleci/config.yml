@@ -28,6 +28,8 @@ jobs:
             JEST_JUNIT_OUTPUT_DIR: test-results
       - store_artifacts:
           path: test-results
+      - store_artifacts:
+          path: coverage
       - deploy:
           command: 
               mv -- test-results $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
