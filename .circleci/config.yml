@@ -13,7 +13,7 @@ jobs:
       - run: echo "This is the build job"
       - run:        
         name: Install awscli
-        command: npm -g install awscli
+        command: npm install awscli
   test:
     docker:
       - image: cimg/node:16.1.0
