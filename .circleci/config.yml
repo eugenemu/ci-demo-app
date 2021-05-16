@@ -30,10 +30,8 @@ jobs:
           path: test-results
       - store_artifacts:
           path: coverage
-      - run:
-          name: Install fossa-cli
-          command: 
-              curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
+      - run: |
+          curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
       - deploy:
           command: 
               mv -- test-results $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
