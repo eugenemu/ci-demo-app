@@ -12,7 +12,6 @@ jobs:
       - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
       - run: echo "This is the build job"
       - run:        
-        name: Install awscli
         command: npm install awscli
   test:
     docker:
