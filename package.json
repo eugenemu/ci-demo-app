@@ -37,6 +37,7 @@
     ]
   },
   "devDependencies": {
+    "aws-code-deploy": "^1.0.11",
     "jest-junit": "^10.0.0"
   },
   "jest-junit": {
