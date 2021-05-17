@@ -32,7 +32,8 @@ jobs:
           path: coverage
       - run: 
           name: Install aws-cli
-          command: sudo apt-get update | sudo apt-get install python-pip | sudo pip install awscli
+          command: sudo apt-get update | sudo apt-get install software-properties-common |
+                   sudo apt-add-repository universe | sudo apt-get install python-pip | sudo pip install awscli
       - run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
       - deploy:
