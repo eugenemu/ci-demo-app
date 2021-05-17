@@ -48,7 +48,7 @@ jobs:
       - deploy:
           command: |
               sudo mv -- test-results $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
-              aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://test-results-bohrman --metadata --recursive {\"git_sha1\":\"$CIRCLE_SHA1\"}
+              aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://test-results-bohrman --recursive {\"git_sha1\":\"$CIRCLE_SHA1\"}
 workflows:
   build_and_test:
     jobs:
