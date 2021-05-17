@@ -32,7 +32,8 @@ jobs:
           path: coverage
       - run: 
           name: Install aws-cli
-          command: curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" / unzip awscliv2.zip | sudo ./aws/install
+          command: curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" | unzip awscli-bundle.zip | sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
       - run: |
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
       - deploy:
