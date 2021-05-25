@@ -9,7 +9,7 @@ jobs:
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
       - checkout
-      - run: echo 'export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip' >> $BASH_ENV
+      # - run: 
       - run: echo "This is the build job"
   test:
     docker:
@@ -50,11 +50,11 @@ jobs:
           curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | bash
       - deploy:
           command: |
-              source $BASH_ENV
-              sudo mv -- test-results $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
-              aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://test-results-bohrman --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
+              export ARTIFACT_BUILD=$CIRCLE_PROJECT_REPONAME-$CIRCLE_BUILD_NUM.zip
+              zip -r $ARTIFACT_BUILD test-results/
+              aws s3 cp $ARTIFACT_BUILD s3://test-results-bohrman --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
 workflows:
   build_and_test:
     jobs:
-      - build
+      # - build
       - test
