@@ -8,8 +8,7 @@ jobs:
           username: $DOCKERHUB_USERNAME 
           password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
     steps:
-      - checkout
-      # - run: 
+      - checkout 
       - run: echo "This is the build job"
   test:
     docker:
@@ -56,5 +55,5 @@ jobs:
 workflows:
   build_and_test:
     jobs:
-      # - build
+      - build
       - test
